@@ -2,6 +2,7 @@ name: check_run context
 
 on:
   check_run:
+    types: [created, rerequested, completed, requested_action]
 
 permissions:
   checks: write
