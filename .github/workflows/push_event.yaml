@@ -3,9 +3,6 @@ name: push context
 on:
   push:
 
-permissions:
-  checks: write
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
   cancel-in-progress: true
@@ -13,10 +10,6 @@ concurrency:
 jobs:
   context:
     runs-on: ubuntu-latest
-    # if: >-
-    #   github.event_name == 'pull_request' ||
-    #   github.event.state == 'error' ||
-    #   github.event.state == 'failure'
     steps:
       - name: Dump GitHub context
         id: github_context_step
@@ -35,3 +28,4 @@ jobs:
         run: |
           git --version
           jq --version
+          exit 136
