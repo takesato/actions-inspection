@@ -1,8 +1,7 @@
-name: inspect context
+name: pull_request context
 
 on:
   pull_request:
-  status:
 
 permissions:
   checks: write
