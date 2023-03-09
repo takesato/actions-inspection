@@ -1,0 +1,37 @@
+name: push context
+
+on:
+  push:
+
+permissions:
+  checks: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  context:
+    runs-on: ubuntu-latest
+    # if: >-
+    #   github.event_name == 'pull_request' ||
+    #   github.event.state == 'error' ||
+    #   github.event.state == 'failure'
+    steps:
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
+      - name: Dump job context
+        run: echo '${{ toJSON(job) }}'
+      - name: Dump steps context
+        run: echo '${{ toJSON(steps) }}'
+      - name: Dump runner context
+        run: echo '${{ toJSON(runner) }}'
+      - name: Dump strategy context
+        run: echo '${{ toJSON(strategy) }}'
+      - name: Dump matrix context
+        run: echo '${{ toJSON(matrix) }}'
+      - name: Version check
+        run: |
+          git --version
+          jq --version
