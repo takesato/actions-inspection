@@ -1,7 +1,7 @@
 name: status context
 
 on:
-  status:
+  status
 
 permissions:
   checks: write
