@@ -3,8 +3,7 @@ name: push context
 on:
   push:
 
-permissions:
-  checks: write
+permissions: write-all
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
