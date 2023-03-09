@@ -1,4 +1,4 @@
-name: status event context
+name: status context
 
 on:
   status:
