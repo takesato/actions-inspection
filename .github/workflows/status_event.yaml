@@ -1,7 +1,6 @@
 name: inspect context
 
 on:
-  pull_request:
   status:
 
 permissions:
