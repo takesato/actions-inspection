@@ -25,3 +25,4 @@ jobs:
       - name: error
         run: |
           echo ::error:: error
+          exit 123
