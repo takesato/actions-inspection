@@ -3,9 +3,6 @@ name: status context
 on:
   status
 
-permissions:
-  checks: write
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
   cancel-in-progress: true
