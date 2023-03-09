@@ -14,10 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: debug
-        run: echo '::debug:: debug'
+        run: |
+          echo '::debug:: debug'
       - name: notice
-        run: echo '::notice:: notice'
+        run: |
+          echo ::notice:: notice
       - name: warning
-        run: echo '::warning:: warning'
+        run: |
+          echo ::warning:: warning
       - name: error
-        run: echo '::error:: error'
+        run: |
+          echo ::error:: error
