@@ -1,0 +1,23 @@
+name: inspect annotation
+
+on:
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: debug
+        run: echo '::debug:: debug'
+      - name: notice
+        run: echo '::notice:: notice'
+      - name: warning
+        run: echo '::warning:: warning'
+      - name: error
+        run: echo '::error:: error'
