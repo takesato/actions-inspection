@@ -1,7 +1,7 @@
-name: status event context
+name: check_run context
 
 on:
-  status:
+  check_run:
 
 permissions:
   checks: write
@@ -13,10 +13,6 @@ concurrency:
 jobs:
   context:
     runs-on: ubuntu-latest
-    # if: >-
-    #   github.event_name == 'pull_request' ||
-    #   github.event.state == 'error' ||
-    #   github.event.state == 'failure'
     steps:
       - name: Dump GitHub context
         id: github_context_step
