@@ -3,7 +3,8 @@ name: pull_request annotation
 on:
   pull_request:
 
-permissions: {}
+permissions: 
+  statuses: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
@@ -26,6 +27,8 @@ jobs:
         run: |
           echo ::error:: error
       - name: status update
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           echo '${{ toJSON(github.event.pull_request) }}'
           echo ${{ github.event.pull_request.head.sha }}
