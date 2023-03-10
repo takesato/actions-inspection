@@ -25,4 +25,15 @@ jobs:
       - name: error
         run: |
           echo ::error:: error
-          exit 123
+      - name: status update
+        run: |
+          echo '${{ toJSON(github.event.pull_request) }}'
+          echo ${{ github.event.pull_request.head.sha }}
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/takesato/actions-inspection/statuses/${{ github.event.pull_request.head.sha }} \
+            -f state='failure' \
+            -f description='The build failure' \
+            -f context='api test' 
