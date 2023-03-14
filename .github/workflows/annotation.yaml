@@ -40,3 +40,7 @@ jobs:
             -f state='failure' \
             -f description='The build failure' \
             -f context='api test' 
+      - name: state update
+        run: |
+          echo "::set-output name=changedState::false"
+          echo "::set-output name=stateMessage::use set-output state change"
