@@ -21,6 +21,8 @@ jobs:
           echo "SAMPLE_VAR2=${{ vars.SAMPLE_VAR2 }}"
   check_envs:
     runs-on: ubuntu-latest
+    env:
+      SAMPLE_VAR1: job variable
     steps:
       - name: Dump SAMPLE_VAR
         run: |
