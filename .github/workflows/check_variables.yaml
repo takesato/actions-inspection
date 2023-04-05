@@ -1,0 +1,50 @@
+name: check variables
+
+on:
+  pull_request:
+env:
+  SAMPLE_VAR2: context variable
+
+jobs:
+  check_variables:
+    strategy:
+        matrix:
+          environment: [main, variables]
+    runs-on: ubuntu-latest
+    environment: ${{ matrix.environment }}
+    steps:
+      - name: Dump GitHub context
+        run: echo '${{ toJSON(github) }}'
+      - name: Dump SAMPLE_VAR
+        run: |
+          echo "SAMPLE_VAR1=${{ vars.SAMPLE_VAR1 }}"
+          echo "SAMPLE_VAR2=${{ vars.SAMPLE_VAR2 }}"
+  check_envs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump SAMPLE_VAR
+        run: |
+          echo "SAMPLE_VAR1=${{ env.SAMPLE_VAR1}}"
+          echo "SAMPLE_VAR2=${{ env.SAMPLE_VAR2}}"
+      - name: Dump SAMPLE_VAR with step env
+        env:
+          SAMPLE_VAR1: step variable
+          SAMPLE_VAR2: step variable
+        run: |
+          echo "SAMPLE_VAR1=${{ env.SAMPLE_VAR1}}"
+          echo "SAMPLE_VAR2=${{ env.SAMPLE_VAR2}}"
+      - name: override SAMPLE_VAR
+        run: |
+          echo "SAMPLE_VAR1=output" >> $GITHUB_ENV
+          echo "SAMPLE_VAR2=output" >> $GITHUB_ENV
+      - name: Dump SAMPLE_VAR again
+        run: |
+          echo "SAMPLE_VAR1=${{ env.SAMPLE_VAR1}}"
+          echo "SAMPLE_VAR2=${{ env.SAMPLE_VAR2}}"
+      - name: Dump SAMPLE_VAR with step env again
+        env:
+          SAMPLE_VAR1: step variable
+          SAMPLE_VAR2: step variable
+        run: |
+          echo "SAMPLE_VAR1=${{ env.SAMPLE_VAR1}}"
+          echo "SAMPLE_VAR2=${{ env.SAMPLE_VAR2}}"
