@@ -23,6 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SAMPLE_VAR1: job variable
+      SAMPLE_VAR2: job variable
     steps:
       - name: Dump SAMPLE_VAR
         run: |
