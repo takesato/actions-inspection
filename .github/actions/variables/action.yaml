@@ -43,3 +43,23 @@ runs:
     #     echo '${{ toJSON(vars) }}'
     #   continue-on-error: true
     #   shell: bash
+    - run: |
+        echo '::notice:: Dump jobs context'
+        echo '${{ toJSON(jobs) }}'
+      continue-on-error: true
+      shell: bash
+    - run: |
+        echo '::notice:: Dump env context'
+        echo '${{ toJSON(env) }}'
+      continue-on-error: true
+      shell: bash
+    - run: |
+        echo '::notice:: Dump needs context'
+        echo '${{ toJSON(needs) }}'
+      continue-on-error: true
+      shell: bash
+    - run: |
+        echo '::notice:: Dump inputs context'
+        echo '${{ toJSON(inputs) }}'
+      continue-on-error: true
+      shell: bash
