@@ -1,5 +1,10 @@
 name: build params
 
+inputs:
+  vars:
+    description: 'inherit vars'
+    required: false
+
 runs:
   using: "composite"
   steps:
@@ -61,5 +66,11 @@ runs:
     - run: |
         echo '::notice:: Dump inputs context'
         echo '${{ toJSON(inputs) }}'
+      continue-on-error: true
+      shell: bash
+    - run: |
+        echo '::notice:: Dump vars context'
+        echo '${{ fromJSON(inputs.vars).SAMPLE_VAR1 }}'
+        echo '${{ fromJSON(inputs.vars).SAMPLE_VAR2 }}'
       continue-on-error: true
       shell: bash

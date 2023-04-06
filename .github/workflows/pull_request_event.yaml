@@ -15,6 +15,7 @@ env:
   WORKFLOW_VAR: Can you take over?
 jobs:
   context:
+    environment: main
     runs-on: ubuntu-latest
     # if: >-
     #   github.event_name == 'pull_request' ||
@@ -37,10 +38,18 @@ jobs:
         run: echo '${{ toJSON(strategy) }}'
       - name: Dump matrix context
         run: echo '${{ toJSON(matrix) }}'
+      - name: Dump secrets context
+        run: echo '${{ toJSON(secrets) }}'
+      - name: Dump vars context
+        run: echo '${{ toJSON(vars) }}'
+      - name: Dump env context
+        run: echo '${{ toJSON(env) }}'
       - name: Set output
         run: echo "OUTPUT_VAR='Can you take over?'" >> $GITHUB_ENV
       - name: call composite action
         env:
           STEP_VAR: Can you take over?
+        with:
+          vars: ${{ toJSON(vars) }}
         uses: ./.github/actions/variables/
 
