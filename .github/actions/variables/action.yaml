@@ -74,3 +74,9 @@ runs:
         echo '${{ fromJSON(inputs.vars).SAMPLE_VAR2 }}'
       continue-on-error: true
       shell: bash
+    - run: |
+        echo '::notice:: Dump vars context'
+        echo 'SAMPLE_VAR1=${{ fromJSON(inputs.vars).SAMPLE_VAR1 }}' >> $GITHUB_ENV
+        echo 'SAMPLE_VAR2=${{ fromJSON(inputs.vars).SAMPLE_VAR2 }}' >> $GITHUB_ENV
+      continue-on-error: true
+      shell: bash

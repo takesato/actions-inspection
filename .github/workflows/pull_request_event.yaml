@@ -52,4 +52,8 @@ jobs:
         with:
           vars: ${{ toJSON(vars) }}
         uses: ./.github/actions/variables/
+      - name: print composite env
+        run: |
+          echo "SAMPLE_VAR1=${SAMPLE_VAR1}"
+          echo "SAMPLE_VAR2=${SAMPLE_VAR2}"
 
