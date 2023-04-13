@@ -1,7 +1,7 @@
-name: pull_request context
+name: auto scale runner
 
 on:
-  pull_request:
+  workflow_dispatch:
 
 permissions:
   checks: write
@@ -12,11 +12,7 @@ concurrency:
 
 jobs:
   context:
-    runs-on: ubuntu-latest
-    # if: >-
-    #   github.event_name == 'pull_request' ||
-    #   github.event.state == 'error' ||
-    #   github.event.state == 'failure'
+    runs-on: [self-hosted, linux]
     steps:
       - name: Dump GitHub context
         id: github_context_step
