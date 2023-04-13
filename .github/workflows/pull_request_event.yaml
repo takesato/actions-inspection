@@ -2,6 +2,7 @@ name: pull_request context
 
 on:
   pull_request:
+  workflow_dispatch:
 
 permissions:
   checks: write
