@@ -23,7 +23,7 @@ jobs:
         run: |
           git clone https://github.com/${{ env.org }}/${{ env.repo }}.git
           du -sh ./${{ env.repo }}
-          ls -al /pv/${{ env.repo }}
+          ls -al ./${{ env.repo }}
   normal_clone_with_depth1:
     runs-on: [self-hosted, linux]
     steps:
@@ -33,7 +33,7 @@ jobs:
         run: |
           git clone --depth=1 https://github.com/${{ env.org }}/${{ env.repo }}.git
           du -sh ./${{ env.repo }}
-          ls -al /pv/${{ env.repo }}
+          ls -al ./${{ env.repo }}
   reference_clone_1st:
     runs-on: [self-hosted, linux]
     steps:
@@ -52,7 +52,7 @@ jobs:
         run: | 
           git clone --reference-if-able=/pv/${{ env.repo }}.git https://github.com/${{ env.org }}/${{ env.repo }}.git
           du -sh ./${{ env.repo }}
-          ls -al /pv/${{ env.repo }}
+          ls -al ./${{ env.repo }}
   reference_clone_3rd_with_depth1:
     runs-on: [self-hosted, linux]
     needs: [reference_clone_2nd]
@@ -61,4 +61,4 @@ jobs:
         run: |
           git clone --reference-if-able=/pv/${{ env.repo }}.git --depth=1 https://github.com/${{ env.org }}/${{ env.repo }}.git
           du -sh ./${{ env.repo }}
-          ls -al /pv/${{ env.repo }}
+          ls -al ./${{ env.repo }}
