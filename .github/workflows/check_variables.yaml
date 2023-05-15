@@ -52,6 +52,7 @@ jobs:
           echo "SAMPLE_VAR1=${{ env.SAMPLE_VAR1}}"
           echo "SAMPLE_VAR2=${{ env.SAMPLE_VAR2}}"
       - name: Dump Variables By Type
+        run: |
           echo "BOOL_TRUE=${{ vars.BOOL_TRUE }} / ${{ vars.BOOL_TRUE == true }}  / ${{ vars.BOOL_TRUE == 'true' }}"
           echo "BOOL_FALSE=${{ vars.BOOL_FALSE }} / ${{ vars.BOOL_FALSE == false }} / ${{ vars.BOOL_FALSE == 'false' }}"
           echo "EMPTY_STRING=${{ vars.EMPTY_STRING }} / ${{ vars.EMPTY_STRING == '' }} / ${{ vars.EMPTY_STRING == 0 }}"
