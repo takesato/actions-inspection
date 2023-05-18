@@ -18,7 +18,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            console.log(context.inputs.build_branch);
+            console.log(context.inputs.push_branch);
             console.log(context.github.sha);
             await github.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
               owner: 'takesato',
