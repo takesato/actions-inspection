@@ -18,13 +18,15 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            console.log(${{ inputs.push_branch }})
+            console.log(${{ github.sha }})
             console.log(context.inputs);
-            console.log(context.github.sha);
+            console.log(context.github);
             await github.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
               owner: 'takesato',
               repo: 'actions-inspection',
               ref: `origin/${{ inputs.push_branch }}`,
-              sha: context.github.sha,
+              sha: ${{ github.sha }},
               force: true,
               headers: {
                 'X-GitHub-Api-Version': '2022-11-28'
