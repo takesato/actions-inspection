@@ -7,8 +7,7 @@ on:
         description: 'choose branch'
         required: true
 permissions:
-  contents: read
-  id-token: write
+  contents: write
 
 jobs:
   push_branch:
@@ -18,10 +17,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            console.log('${{ inputs.push_branch }}')
-            console.log('${{ github.sha }}')
-            console.log(context.inputs);
-            console.log(context.github);
             await github.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
               owner: 'takesato',
               repo: 'actions-inspection',
