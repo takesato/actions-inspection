@@ -10,10 +10,9 @@ permissions:
   contents: read
   id-token: write
 
-env:
+jobs:
   push_branch:
     runs-on: ubuntu-latest
-jobs:
     steps:
       - name: push branch
         uses: actions/github-script@v6
