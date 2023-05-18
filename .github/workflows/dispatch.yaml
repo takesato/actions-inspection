@@ -1,0 +1,33 @@
+name: GitHub Script Sample
+
+on:
+  workflow_dispatch:
+    inputs:
+      push_branch:
+        description: 'choose branch'
+        required: true
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  push_branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: push branch
+        uses: actions/github-script@v6
+        with:
+          script: |
+            console.log(context.inputs.build_branch);
+            console.log(context.github.sha);
+            await github.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
+              owner: 'takesato',
+              repo: 'actions-inspection',
+              ref: `origin/${context.inputs.build_branch}`,
+              sha: context.github.sha,
+              force: true,
+              headers: {
+                'X-GitHub-Api-Version': '2022-11-28'
+              }
+            });
