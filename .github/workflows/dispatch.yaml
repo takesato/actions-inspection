@@ -23,7 +23,7 @@ jobs:
             await github.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
               owner: 'takesato',
               repo: 'actions-inspection',
-              ref: `origin/${context.inputs.build_branch}`,
+              ref: `origin/${context.inputs.push_branch}`,
               sha: context.github.sha,
               force: true,
               headers: {
