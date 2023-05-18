@@ -13,7 +13,7 @@ permissions:
 env:
   push_branch:
     runs-on: ubuntu-latest
-
+jobs:
     steps:
       - name: push branch
         uses: actions/github-script@v6
