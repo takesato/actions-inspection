@@ -6,6 +6,13 @@ on:
       push_branch:
         description: 'choose branch'
         required: true
+      value:
+        description: 'choice'
+        type: choice
+        options:
+          - 
+          - true
+          - false
 permissions: write-all
   # contents: write
 
@@ -32,6 +39,7 @@ jobs:
         with:
           github-token: ${{ secrets.PAT }}
           script: |
+            console.log('${{ inputs.value }}')
             await github.request('PATCH /repos/{owner}/{repo}/actions/variables/{name}', {
               owner: '${{ github.repository }}'.split('/')[0],
               repo: '${{ github.repository }}'.split('/')[1],
