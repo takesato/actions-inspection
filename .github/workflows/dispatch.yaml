@@ -30,7 +30,7 @@ jobs:
       - name: update variables
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PAT }}
           script: |
             await github.request('PATCH /repos/{owner}/{repo}/actions/variables/{name}', {
               owner: '${{ github.repository }}'.split('/')[0],
