@@ -15,7 +15,7 @@ jobs:
   debug_condition_1:
     runs-on: ubuntu-latest
     environment: develop
-    needs: setup
+    needs: debug_condition_2
     if: ${{ needs.setup.outputs.SAMPLE_VAR1 == 'repository' }}
     steps:
       - name: check variables
@@ -32,7 +32,7 @@ jobs:
           echo ${{ needs.setup.outputs.SAMPLE_VAR1 }}
   debug_condition_3:
     runs-on: ubuntu-latest
-    needs: setup
+    needs: [ setup, debug_condition_4]
     if: ${{ needs.setup.outputs.SAMPLE_VAR1 == 'repository' }}
     steps:
       - name: check variables
