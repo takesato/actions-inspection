@@ -1,0 +1,36 @@
+name: debug condition
+
+on:
+  push:
+
+jobs:
+  debug_condition_1:
+    runs-on: ubuntu-latest
+    environment: develop
+    if: ${{ vars.SAMPLE_VAR1 == 'repository' }}
+    steps:
+      - name: check variables
+        run: |
+          echo ${{ vars.SAMPLE_VAR1 }}
+  debug_condition_2:
+    runs-on: ubuntu-latest
+    environment: develop
+    if: ${{ vars.SAMPLE_VAR1 == 'develop' }}
+    steps:
+      - name: check variables
+        run: |
+          echo ${{ vars.SAMPLE_VAR1 }}
+  debug_condition_3:
+    runs-on: ubuntu-latest
+    if: ${{ vars.SAMPLE_VAR1 == 'repository' }}
+    steps:
+      - name: check variables
+        run: |
+          echo ${{ vars.SAMPLE_VAR1 }}
+  debug_condition_4:
+    runs-on: ubuntu-latest
+    if: ${{ vars.SAMPLE_VAR1 == 'develop' }}
+    steps:
+      - name: check variables
+        run: |
+          echo ${{ vars.SAMPLE_VAR1 }}
