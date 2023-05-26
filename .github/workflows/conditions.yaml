@@ -2,38 +2,47 @@ name: debug condition
 
 on:
   push:
-environment: develop
-env:
-  SAMPLE_VAR1: ${{ vars.SAMPLE_VAR1 }}
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    environment: develop
+    outputs:
+      SAMPLE_VAR1: ${{ steps.setup_env.outputs.SAMPLE_VAR1 }}
+    steps:
+      - id: setup_env
+        run: echo "SAMPLE_VAR1='${{ vars.SAMPLE_VAR1 }}'" >> "$GITHUB_OUTPUT"
   debug_condition_1:
     runs-on: ubuntu-latest
     environment: develop
-    if: ${{ env.SAMPLE_VAR1 == 'repository' }}
+    needs: setup
+    if: ${{ needs.setup.outputs.SAMPLE_VAR1 == 'repository' }}
     steps:
       - name: check variables
         run: |
-          echo ${{ env.SAMPLE_VAR1 }}
+          echo ${{ needs.setup.outputs.SAMPLE_VAR1 }}
   debug_condition_2:
     runs-on: ubuntu-latest
     environment: develop
-    if: ${{ env.SAMPLE_VAR1 == 'develop' }}
+    needs: setup
+    if: ${{ needs.setup.outputs.SAMPLE_VAR1 == 'develop' }}
     steps:
       - name: check variables
         run: |
-          echo ${{ env.SAMPLE_VAR1 }}
+          echo ${{ needs.setup.outputs.SAMPLE_VAR1 }}
   debug_condition_3:
     runs-on: ubuntu-latest
-    if: ${{ env.SAMPLE_VAR1 == 'repository' }}
+    needs: setup
+    if: ${{ needs.setup.outputs.SAMPLE_VAR1 == 'repository' }}
     steps:
       - name: check variables
         run: |
-          echo ${{ env.SAMPLE_VAR1 }}
+          echo ${{ needs.setup.outputs.SAMPLE_VAR1 }}
   debug_condition_4:
     runs-on: ubuntu-latest
-    if: ${{ env.SAMPLE_VAR1 == 'develop' }}
+    needs: setup
+    if: ${{ needs.setup.outputs.SAMPLE_VAR1 == 'develop' }}
     steps:
       - name: check variables
         run: |
-          echo ${{ env.SAMPLE_VAR1 }}
+          echo ${{ needs.setup.outputs.SAMPLE_VAR1 }}
