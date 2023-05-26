@@ -2,35 +2,38 @@ name: debug condition
 
 on:
   push:
+environment: develop
+env:
+  SAMPLE_VAR1: ${{ vars.SAMPLE_VAR1 }}
 
 jobs:
   debug_condition_1:
     runs-on: ubuntu-latest
     environment: develop
-    if: ${{ vars.SAMPLE_VAR1 == 'repository' }}
+    if: ${{ env.SAMPLE_VAR1 == 'repository' }}
     steps:
       - name: check variables
         run: |
-          echo ${{ vars.SAMPLE_VAR1 }}
+          echo ${{ env.SAMPLE_VAR1 }}
   debug_condition_2:
     runs-on: ubuntu-latest
     environment: develop
-    if: ${{ vars.SAMPLE_VAR1 == 'develop' }}
+    if: ${{ env.SAMPLE_VAR1 == 'develop' }}
     steps:
       - name: check variables
         run: |
-          echo ${{ vars.SAMPLE_VAR1 }}
+          echo ${{ env.SAMPLE_VAR1 }}
   debug_condition_3:
     runs-on: ubuntu-latest
-    if: ${{ vars.SAMPLE_VAR1 == 'repository' }}
+    if: ${{ env.SAMPLE_VAR1 == 'repository' }}
     steps:
       - name: check variables
         run: |
-          echo ${{ vars.SAMPLE_VAR1 }}
+          echo ${{ env.SAMPLE_VAR1 }}
   debug_condition_4:
     runs-on: ubuntu-latest
-    if: ${{ vars.SAMPLE_VAR1 == 'develop' }}
+    if: ${{ env.SAMPLE_VAR1 == 'develop' }}
     steps:
       - name: check variables
         run: |
-          echo ${{ vars.SAMPLE_VAR1 }}
+          echo ${{ env.SAMPLE_VAR1 }}
