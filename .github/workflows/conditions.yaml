@@ -11,7 +11,7 @@ jobs:
       SAMPLE_VAR1: ${{ steps.setup_env.outputs.SAMPLE_VAR1 }}
     steps:
       - id: setup_env
-        run: echo "SAMPLE_VAR1='${{ vars.SAMPLE_VAR1 }}'" >> "$GITHUB_OUTPUT"
+        run: echo "SAMPLE_VAR1=${{ vars.SAMPLE_VAR1 }}" >> "$GITHUB_OUTPUT"
   debug_condition_1:
     runs-on: ubuntu-latest
     environment: develop
