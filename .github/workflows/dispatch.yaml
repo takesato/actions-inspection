@@ -26,7 +26,6 @@ jobs:
         run: |
           echo SAMPLE_VAR1=${{ vars['SAMPLE_VAR1'] }}
           echo KEYWORD=${{ vars[env.KEYWORD] }}
-          echo SAMPLE_VAR1=${{ vars['SAMPLE_VAR' + '1'] }}
           echo SAMPLE_VAR1=${{ vars[join(['SAMPLE_VAR','1'], '')] }}
       # - name: push branch
       #   uses: actions/github-script@v6
