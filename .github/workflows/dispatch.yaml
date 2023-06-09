@@ -26,11 +26,11 @@ jobs:
         run: |
           echo SAMPLE_VAR1=${{ vars['SAMPLE_VAR1'] }}
           echo KEYWORD=${{ vars[env.KEYWORD] }}
-          echo HOGE=${{ format('SAMPLE_VAR${0}','1') }} >> $GITHUB_ENV
-          echo HOGE=${{ vars[env.HOGE] }}
-          echo HOGE=${{ format('SAMPLE_VAR${0}','1') }} >> $GITHUB_ENV
-          echo SAMPLE_VAR1=${{ vars[format('SAMPLE_VAR${0}','1')] }}
-          echo SAMPLE_VAR2=${{ vars[format('SAMPLE_VAR${0}','2')] }}
+          echo HOGE=${{ format('SAMPLE_VAR{0}','1') }} >> $GITHUB_ENV
+          echo HOGE=${{ env.HOGE }}
+          echo FUGA=${{ vars[format('SAMPLE_VAR{0}','1')] }}
+      #    echo HOGE=${{ format('SAMPLE_VAR{0}','1') }} >> $GITHUB_ENV
+      #    echo SAMPLE_VAR2=${{ vars[format('SAMPLE_VAR{0}','2')] }}
       # - name: push branch
       #   uses: actions/github-script@v6
       #   with:
