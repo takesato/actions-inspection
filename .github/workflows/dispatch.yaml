@@ -26,9 +26,9 @@ jobs:
         run: |
           echo SAMPLE_VAR1=${{ vars['SAMPLE_VAR1'] }}
           echo KEYWORD=${{ vars[env.KEYWORD] }}
-          echo HOGE=${{ format('SAMPLE_VAR{0}','1') }} >> $GITHUB_ENV
-          echo HOGE=${{ env.HOGE }}
-          echo FUGA=${{ vars[format('SAMPLE_VAR{0}','1')] }}
+          echo HOGE=${{ vars[format('SAMPLE_VAR{0}','1')] }}
+          echo FUGA=${{ vars[format('SAMPLE_VAR{0}','2')] }}
+          echo BAR=${{ vars[format('SAMPLE_VAR{0}','')] }}
       #    echo HOGE=${{ format('SAMPLE_VAR{0}','1') }} >> $GITHUB_ENV
       #    echo SAMPLE_VAR2=${{ vars[format('SAMPLE_VAR{0}','2')] }}
       # - name: push branch
