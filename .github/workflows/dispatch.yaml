@@ -19,7 +19,14 @@ permissions: write-all
 jobs:
   push_branch:
     runs-on: ubuntu-latest
+    env:
+      KEYWORD: SAMPLE_VAR1
     steps:
+      - name: Extract variables
+        run: |
+          echo SAMPLE_VAR1=${{ vars['SAMPLE_VAR1'] }}
+          echo SAMPLE_VAR2=${{ vars['SAMPLE_VAR2'] }}
+          echo KEYWORD=${{ vars[env.KEYWORD] }}
       - name: push branch
         uses: actions/github-script@v6
         with:
