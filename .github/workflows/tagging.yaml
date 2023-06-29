@@ -12,12 +12,13 @@ on:
         required: true
         type: string
 
+permissions:
+  contents: write
 
 jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
-      - uses: GitHubSecurityLab/actions-permissions/monitor@v1
       - name: remove
         uses: actions/github-script@v6
         with:
@@ -40,27 +41,27 @@ jobs:
                 }
               })
 
-      - name: tagging1
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const params = {
-              owner: '${{ github.repository }}'.split('/')[0],
-              repo: '${{ github.repository }}'.split('/')[1],
-              object: '${{ inputs.commit_sha }}',
-              message: '${{ inputs.tag }}',
-              type: 'commit',
-              tag: '${{ inputs.tag }}',
-              headers: {
-                'X-GitHub-Api-Version': '2022-11-28'
-              }
-            }
-            await github
-              .request('POST /repos/{owner}/{repo}/git/tags', params)
-              // .then(async (response: Response) => {
-              //   console.log(response.data.tag)
-              //   console.log(response.data.sha)
-              // });
+      # - name: tagging1
+      #   uses: actions/github-script@v6
+      #   with:
+      #     script: |
+      #       const params = {
+      #         owner: '${{ github.repository }}'.split('/')[0],
+      #         repo: '${{ github.repository }}'.split('/')[1],
+      #         object: '${{ inputs.commit_sha }}',
+      #         message: '${{ inputs.tag }}',
+      #         type: 'commit',
+      #         tag: '${{ inputs.tag }}',
+      #         headers: {
+      #           'X-GitHub-Api-Version': '2022-11-28'
+      #         }
+      #       }
+      #       await github
+      #         .request('POST /repos/{owner}/{repo}/git/tags', params)
+      #         // .then(async (response: Response) => {
+      #         //   console.log(response.data.tag)
+      #         //   console.log(response.data.sha)
+      #         // });
       - name: tagging2
         uses: actions/github-script@v6
         with:
