@@ -35,10 +35,10 @@ jobs:
             }
             await github
               .request('POST /repos/{owner}/{repo}/git/tags', params)
-              .then(async (response: Response) => {
-                console.log(response.data.tag)
-                console.log(response.data.sha)
-              });
+              // .then(async (response: Response) => {
+              //   console.log(response.data.tag)
+              //   console.log(response.data.sha)
+              // });
       - name: tagging2
         uses: actions/github-script@v6
         with:
