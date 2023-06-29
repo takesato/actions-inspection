@@ -19,7 +19,7 @@ jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
-      - name: remove
+      - name: Remove old tag
         uses: actions/github-script@v6
         with:
           script: |
@@ -40,8 +40,8 @@ jobs:
                   console.log("例外おきたぽよ")
                 }
               })
-
-      # - name: tagging1
+      # タグを打つだけならこっちの step は不要
+      # - name: Create a tag object
       #   uses: actions/github-script@v6
       #   with:
       #     script: |
@@ -62,7 +62,7 @@ jobs:
       #         //   console.log(response.data.tag)
       #         //   console.log(response.data.sha)
       #         // });
-      - name: tagging2
+      - name: Create a reference of tag
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.PAT }}
