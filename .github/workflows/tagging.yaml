@@ -11,6 +11,10 @@ on:
         description: 'タグを指定してください'
         required: true
         type: string
+      force:
+        description: '強制上書きする場合はチェックを入れてください'
+        required: false
+        type: boolean
 
 permissions:
   contents: write
@@ -20,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Remove old tag
+        if: inputs.force == true
         uses: actions/github-script@v6
         with:
           script: |
