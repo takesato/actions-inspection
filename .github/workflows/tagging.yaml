@@ -18,6 +18,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # - uses: GitHubSecurityLab/actions-permissions/monitor@v1
+      - name: remove
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const params = {
+              owner: '${{ github.repository }}'.split('/')[0],
+              repo: '${{ github.repository }}'.split('/')[1],
+              ref: 'tags/${{ inputs.tag }}'
+            };
+
+            await github
+              .request("GET /repos/{owner}/{repo}/git/ref/{ref}", params)
+              .then(async (response: Response) => {
+                await github
+                  .request("DELETE /repos/{owner}/{repo}/git/refs/{ref}", params)
+              })
+              .catch(async (response: RequestError) => {
+                if (response.status != 404) {
+                  console.log("例外おきたぽよ")
+                }
+              })
+
       - name: tagging1
         uses: actions/github-script@v6
         with:
