@@ -12,13 +12,12 @@ on:
         required: true
         type: string
 
-permissions:
-  contents: read
 
 jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
+      - uses: GitHubSecurityLab/actions-permissions/monitor@v1
       - name: tagging
         uses: actions/github-script@v6
         with:
