@@ -30,11 +30,11 @@ jobs:
 
             await github
               .request("GET /repos/{owner}/{repo}/git/ref/{ref}", params)
-              .then(async (response: Response) => {
+              .then(async (response) => {
                 await github
                   .request("DELETE /repos/{owner}/{repo}/git/refs/{ref}", params)
               })
-              .catch(async (response: RequestError) => {
+              .catch(async (response) => {
                 if (response.status != 404) {
                   console.log("例外おきたぽよ")
                 }
