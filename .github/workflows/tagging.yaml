@@ -32,6 +32,9 @@ jobs:
               headers: {
                 'X-GitHub-Api-Version': '2022-11-28'
               }
+            }).then(async (response: Response) => {
+              console.log(response.data.tag);
+              console.log(response.data.sha);
             });
       - name: tagging2
         uses: actions/github-script@v6
