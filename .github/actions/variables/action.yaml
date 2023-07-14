@@ -1,0 +1,82 @@
+name: build params
+
+inputs:
+  vars:
+    description: 'inherit vars'
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        echo '::notice:: Dump github context'
+        echo '${{ toJSON(github) }}'
+      continue-on-error: true
+      shell: bash
+    - run: |
+        echo '::notice:: Dump job context'
+        echo '${{ toJSON(job) }}'
+      continue-on-error: true
+      shell: bash
+    - run: |
+        echo '::notice:: Dump steps context'
+        echo '${{ toJSON(steps) }}'
+      continue-on-error: true
+      shell: bash
+    - run: |
+        echo '::notice:: Dump runner context'
+        echo '${{ toJSON(runner) }}'
+      continue-on-error: true
+      shell: bash
+    - run: |
+        echo '::notice:: Dump strategy context'
+        echo '${{ toJSON(strategy) }}'
+      continue-on-error: true
+      shell: bash
+    - run: |
+        echo '::notice:: Dump matrix context'
+        echo '${{ toJSON(matrix) }}'
+      continue-on-error: true
+      shell: bash
+    # - run: |
+    #     echo '::notice:: Dump secrets context'
+    #     echo '${{ toJSON(secrets) }}'
+    #   continue-on-error: true
+    #   shell: bash
+    # - run: |
+    #     echo '::notice:: Dump vars context'
+    #     echo '${{ toJSON(vars) }}'
+    #   continue-on-error: true
+    #   shell: bash
+    # - run: |
+    #     echo '::notice:: Dump jobs context'
+    #     echo '${{ toJSON(jobs) }}'
+    #   continue-on-error: true
+    #   shell: bash
+    - run: |
+        echo '::notice:: Dump env context'
+        echo '${{ toJSON(env) }}'
+      continue-on-error: true
+      shell: bash
+    # - run: |
+    #     echo '::notice:: Dump needs context'
+    #     echo '${{ toJSON(needs) }}'
+    #   continue-on-error: true
+    #   shell: bash
+    - run: |
+        echo '::notice:: Dump inputs context'
+        echo '${{ toJSON(inputs) }}'
+      continue-on-error: true
+      shell: bash
+    - run: |
+        echo '::notice:: Dump vars context'
+        echo '${{ fromJSON(inputs.vars).SAMPLE_VAR1 }}'
+        echo '${{ fromJSON(inputs.vars).SAMPLE_VAR2 }}'
+      continue-on-error: true
+      shell: bash
+    - run: |
+        echo '::notice:: Dump vars context'
+        echo 'SAMPLE_VAR1=${{ fromJSON(inputs.vars).SAMPLE_VAR1 }}' >> $GITHUB_ENV
+        echo 'SAMPLE_VAR2=${{ fromJSON(inputs.vars).SAMPLE_VAR2 }}' >> $GITHUB_ENV
+      continue-on-error: true
+      shell: bash
