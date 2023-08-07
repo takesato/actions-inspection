@@ -2,6 +2,7 @@ name: push event context
 
 on:
   push:
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
