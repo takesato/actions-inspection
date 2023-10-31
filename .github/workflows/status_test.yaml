@@ -11,8 +11,7 @@ jobs:
     #   github.event.state == 'error' ||
     #   github.event.state == 'failure'
     steps:
-      - run: sleep 1000
-        if: false
+      - run: exit 1
       - if: cancelled()
         run: echo 'cancelled'
       - if: failure()
@@ -29,3 +28,5 @@ jobs:
         run: echo '!cancelled && failure'
       - if: ${{ cancelled() && !failure() }}
         run: echo 'cancelled && !failure'
+      - if: ${{ success() }}
+        run: echo 'success'
