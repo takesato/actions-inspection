@@ -12,6 +12,7 @@ jobs:
     #   github.event.state == 'failure'
     steps:
       - run: sleep 1000
+        if: false
       - if: cancelled()
         run: echo 'cancelled'
       - if: failure()
