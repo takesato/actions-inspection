@@ -1,0 +1,30 @@
+name: status test
+
+on:
+  push:
+
+jobs:
+  context:
+    runs-on: ubuntu-latest
+    # if: >-
+    #   github.event_name == 'pull_request' ||
+    #   github.event.state == 'error' ||
+    #   github.event.state == 'failure'
+    steps:
+      - run: exit 1
+      - if: cancelled()
+        run: echo 'cancelled'
+      - if: failure()
+        run: echo 'failure'
+      - if: cancelled() && failure()
+        run: echo 'cancelled && failure'
+      - if: ${{ !cancelled() }}
+        run: echo '!cancelled'
+      - if: ${{ !failure() }}
+        run: echo '!failure'
+      - if: ${{ !cancelled() && !failure() }}
+        run: echo '!cancelled && !failure'
+      - if: ${{ !cancelled() && failure() }}
+        run: echo '!cancelled && failure'
+      - if: ${{ cancelled() && !failure() }}
+        run: echo 'cancelled && !failure'
