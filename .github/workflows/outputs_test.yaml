@@ -1,0 +1,25 @@
+name: outputs test
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    outputs:
+      test1: ${{ steps.changes1.outputs.result }}
+      test2: ${{ steps.changes2.outputs.result }}
+    steps:
+      - id: changes1
+        if: github.event_name == 'pull_request'
+        run: echo "result=${{ github.event_name }}" >> $GITHUB_OUTPUT
+      - id: changes2
+        if: github.event_name == 'push'
+        run: echo "result=${{ github.event_name }}" >> $GITHUB_OUTPUT
+  next:
+    runs-on: ubuntu-latest
+    needs: [ test ]
+    steps:
+      - run: |
+          echo "${{ needs.test.outputs.test1 }}"
+          echo "${{ needs.test.outputs.test2 }}"
