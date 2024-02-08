@@ -1,0 +1,42 @@
+name: Concurrency
+
+on:
+  workflow_dispatch:
+    inputs:
+      group:
+        type: string
+        required: true
+      cancel:
+        type: boolean
+        required: true
+concurrency:
+  group: ${{ inputs.group }}
+  cancel-in-progress: ${{ inputs.cancel }}
+jobs:
+  annotation:
+    defaults:
+      run:
+        shell: bash
+    runs-on: ubuntu-latest
+    steps:
+      - name: annotation
+        run: |
+          echo "::warning:: ${{ inputs.group }}"
+          echo "::warning:: ${{ inputs.cancel }}"
+  build:
+    uses: ./.github/workflows/concurrency-first.yaml
+  sequence1:
+    uses: ./.github/workflows/concurrency-child.yaml
+    needs: [ build ]
+  sequence2:
+    uses: ./.github/workflows/concurrency-child.yaml
+    needs: [ sequence1 ]
+  sequence3:
+    uses: ./.github/workflows/concurrency-child.yaml
+    needs: [ sequence2 ]
+  sequence4:
+    uses: ./.github/workflows/concurrency-child.yaml
+    needs: [ sequence3 ]
+  sequence5:
+    uses: ./.github/workflows/concurrency-child.yaml
+    needs: [ sequence4 ]

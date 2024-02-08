@@ -1,0 +1,11 @@
+name: Concurrency Child
+
+on:
+  workflow_call:
+concurrency:
+  group: test
+jobs:
+  child:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 15

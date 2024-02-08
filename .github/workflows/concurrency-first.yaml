@@ -1,0 +1,12 @@
+name: Concurrency First
+
+on:
+  workflow_call:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  child:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 45
