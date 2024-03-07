@@ -1,0 +1,35 @@
+name: debug debug-mode
+on:
+  workflow_dispatch:
+
+jobs:
+  debug1:
+    defaults:
+      run:
+        shell: bash
+    runs-on: ubuntu-latest
+    steps: 
+      - run: |         
+          echo ACTIONS_RUNNER_DEBUG=${ACTIONS_RUNNER_DEBUG}
+          echo ACTIONS_STEP_DEBUG=${ACTIONS_STEP_DEBUG} 
+          echo RUNNER_DEBUG=${RUNNER_DEBUG}
+          echo vars_ACTIONS_RUNNER_DEBUG=${{ vars.ACTIONS_RUNNER_DEBUG }}
+          echo vars_ACTIONS_STEP_DEBUG=${{ vars.ACTIONS_STEP_DEBUG }}
+          echo vars_RUNNER_DEBUG=${{ vars.RUNNER_DEBUG }}
+          echo vars_RE_RUN_DEBUG=${{ vars.RE_RUN_DEBUG }}
+  debug2:
+    needs: [debug1]
+    defaults:
+      run:
+        shell: bash
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo ACTIONS_RUNNER_DEBUG=${ACTIONS_RUNNER_DEBUG}
+          echo ACTIONS_STEP_DEBUG=${ACTIONS_STEP_DEBUG}
+          echo RUNNER_DEBUG=${RUNNER_DEBUG}
+          echo vars_ACTIONS_RUNNER_DEBUG=${{ vars.ACTIONS_RUNNER_DEBUG }}
+          echo vars_ACTIONS_STEP_DEBUG=${{ vars.ACTIONS_STEP_DEBUG }}
+          echo vars_RUNNER_DEBUG=${{ vars.RUNNER_DEBUG }}
+          echo vars_RE_RUN_DEBUG=${{ vars.RE_RUN_DEBUG }}
+          exit 1
