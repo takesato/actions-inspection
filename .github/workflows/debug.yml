@@ -1,4 +1,5 @@
 name: debug debug-mode
+run-name: ${{ format('{0} {1}', github.event_name, '+ test') }}
 on:
   workflow_dispatch:
 
